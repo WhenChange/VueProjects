@@ -97,6 +97,11 @@
       <!-- TODO: CODE TO GET TOP SELLERS HERE -->
       
       <p>We operate in:</p>
+      <ul>
+          <li v-for="country in bookstores.countries" :key="country">
+            {{ country }}
+          </li>
+        </ul>
       <p>Our #1 seller:
         <ul>
           <li v-for="book in bookstores.topSellers" :key="book">
