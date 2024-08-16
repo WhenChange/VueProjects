@@ -40,24 +40,14 @@
             <!-- <div class="col-md-6"> -->
             <div class="col-6 col-sm-6">
               <label for="password" class="form-label">Password</label>
-              <input
-                type="password"
-                class="form-control"
-                id="password"
-                v-model="formData.password"
-              />
+              <input type="password" class="form-control" id="password" v-model="formData.password" />
             </div>
           </div>
           <div class="row mb-3">
             <!-- <div class="col-md-6"> -->
             <div class="col-6 col-sm-6">
               <div class="form-check">
-                <input
-                  type="checkbox"
-                  class="form-check-input"
-                  id="isAustralian"
-                  v-model="formData.isAustralian"
-                />
+                <input type="checkbox" class="form-check-input" id="isAustralian" v-model="formData.isAustralian" />
                 <label class="form-check-label" for="isAustralian">Australian Resident?</label>
               </div>
             </div>
@@ -73,12 +63,7 @@
           </div>
           <div class="mb-3">
             <label for="reason" class="form-label">Reason for joining</label>
-            <textarea
-              class="form-control"
-              id="reason"
-              rows="3"
-              v-model="formData.reason"
-            ></textarea>
+            <textarea class="form-control" id="reason" rows="3" v-model="formData.reason"></textarea>
           </div>
           <div class="text-center">
             <button type="submit" class="btn btn-primary me-2">Submit</button>
@@ -91,12 +76,7 @@
   <!-- new -->
   <div class="row mt-5" v-if="submittedCards.length">
     <div class="d-flex flex-wrap justify-content-start">
-      <div
-        v-for="(card, index) in submittedCards"
-        :key="index"
-        class="card m-2"
-        style="width: 18rem"
-      >
+      <div v-for="(card, index) in submittedCards" :key="index" class="card m-2" style="width: 18rem">
         <div class="card-header">User Information</div>
         <ul class="list-group list-group-flush">
           <li class="list-group-item">Username: {{ card.username }}</li>
