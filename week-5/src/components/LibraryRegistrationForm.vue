@@ -13,6 +13,7 @@ const formData = ref({
 })
 
 const submittedCards = ref([])
+const message = ref('')
 
 const submitForm = () => {
   validateName(true)
@@ -83,6 +84,24 @@ const validateConfirmPassword = (blur) => {
     if (blur) errors.value.confirmPassword = 'Passwords do not match.'
   } else {
     errors.value.confirmPassword = null
+  }
+}
+
+const validateReason = (blur) => {
+  const minLength = 10
+  const reason = formData.value.reason
+  if (reason.length < minLength) {
+    if (blur) {
+      errors.value.reason = `Reason must be at least ${minLength} characters long.`
+      message.value = ''
+    }
+  } else {
+    if (reason.toLowerCase().includes('friend')) {
+      message.value = 'Great to have a friend'
+    } else {
+      message.value = ''
+    }
+    errors.value.reason = null
   }
 }
 </script>
@@ -168,7 +187,11 @@ const validateConfirmPassword = (blur) => {
               id="reason"
               rows="3"
               v-model="formData.reason"
+              @blur="() => validateReason(true)"
+              @input="() => validateReason(false)"
             ></textarea>
+            <div v-if="errors.reason" class="text-danger">{{ errors.reason }}</div>
+            <div v-if="message" class="text-success">{{ message }}</div>
           </div>
           <div class="text-center">
             <button type="submit" class="btn btn-primary me-2">Submit</button>
