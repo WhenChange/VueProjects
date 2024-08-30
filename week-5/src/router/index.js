@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import AboutView from '../views/AboutView.vue'
 import LoginView from '../views/LoginView.vue'
+import RedirectView from '../views/RedirectView.vue'
 import store from '../store/store'
 
 const routes = [
@@ -20,7 +21,7 @@ const routes = [
     // }
     beforeEnter: (to, from, next) => {
       if (!store.state.isAuthenticated) {
-        next({ name: 'Login' });
+        next({ name: 'Redirect' });
       } else {
         next(); 
       }
@@ -30,6 +31,11 @@ const routes = [
     path: '/login',
     name: 'Login',
     component: LoginView
+  },
+  {
+    path: '/redirect',
+    name: 'Redirect',
+    component: RedirectView
   }
 ]
 
