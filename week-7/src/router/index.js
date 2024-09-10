@@ -4,6 +4,7 @@ import AboutView from '../views/AboutView.vue'
 import LoginView from '../views/LoginView.vue'
 import RedirectView from '../views/RedirectView.vue'
 import store from '../store/store'
+import FirebaseSigninView from '../views/FirebaseSigninView.vue'
 
 const routes = [
   {
@@ -36,7 +37,12 @@ const routes = [
     path: '/redirect',
     name: 'Redirect',
     component: RedirectView
-  }
+  },
+  {
+    path: '/FireLogin',
+    name: 'FireLogin',
+    component: FirebaseSigninView,
+  },
 ]
 
 const router = createRouter({
