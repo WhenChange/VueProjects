@@ -18,6 +18,10 @@
         </li>
 
         <li class="nav-item">
+          <router-link to="/searchbook" class="nav-link" active-class="active">Search Books</router-link>
+        </li>
+
+        <li class="nav-item">
           <router-link to="/FireLogin" class="nav-link" active-class="active"
             >Firebase Login</router-link
           >
