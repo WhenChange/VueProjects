@@ -41,6 +41,7 @@
         </li>
       </ul>
     </header>
+    <p v-if="isLoggedIn" class="text-center">Welcome! {{email}}, {{ role }}</p>
   </div>
   <!-- Confirm Logout -->
   <div v-if="showLogoutConfirm" class="logout-confirm">
@@ -63,6 +64,8 @@ const router = useRouter()
 
 // From Vuex get log status
 const isLoggedIn = computed(() => store.state.isAuthenticated)
+const email = computed(() => store.state.user?.email || '')
+const role = computed(() => store.state.user?.role || '')
 
 const showLogoutConfirm = ref(false)
 

@@ -1,5 +1,6 @@
 // store.js
 import { createStore } from 'vuex'
+import { getAuth, signOut } from 'firebase/auth';
 
 export default createStore({
   state: {
@@ -16,12 +17,22 @@ export default createStore({
   },
   actions: {
     login({ commit }, user) {
+      
       commit('setAuthentication', true);
       commit('setUser', user);
     },
     logout({ commit }) {
-      commit('setAuthentication', false);
-      commit('setUser', null);
+      const auth = getAuth();
+      signOut(auth)
+        .then(() => {
+          commit('setAuthentication', false);
+          commit('setUser', null);
+          console.log('User successfully signed out.');
+          console.log(auth.currentUser);
+        })
+        .catch((error) => {
+          console.error('Sign out error:', error);
+        });
     },
   },
 });
