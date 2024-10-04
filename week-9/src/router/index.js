@@ -8,8 +8,15 @@ import FirebaseSigninView from '../views/FirebaseSigninView.vue'
 import FirebaseRegisterView from '../views/FirebaseRegisterView.vue'
 import AddBookView from '../views/AddBookView.vue'
 import SearchBookView from '../views/SearchBookView.vue'
+import GetBookCountView from '../views/GetBookCountView.vue'
+
 
 const routes = [
+  {
+    path: '/GetBookCount',
+    name: 'GetBookCount',
+    component: GetBookCountView
+  },
   {
     path: '/',
     name: 'Home',
@@ -37,7 +44,7 @@ const routes = [
       if (!store.state.isAuthenticated) {
         next({ name: 'Redirect' });
       } else {
-        next(); 
+        next();
       }
     }
   },

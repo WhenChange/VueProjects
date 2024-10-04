@@ -18,7 +18,15 @@
         </li>
 
         <li class="nav-item">
-          <router-link to="/searchbook" class="nav-link" active-class="active">Search Books</router-link>
+          <router-link to="/searchbook" class="nav-link" active-class="active"
+            >Search Books</router-link
+          >
+        </li>
+
+        <li class="nav-item">
+          <router-link to="/GetBookCount" class="nav-link" active-class="active"
+            >Get Book Count</router-link
+          >
         </li>
 
         <li class="nav-item">
@@ -41,7 +49,7 @@
         </li>
       </ul>
     </header>
-    <p v-if="isLoggedIn" class="text-center">Welcome! {{email}}, {{ role }}</p>
+    <p v-if="isLoggedIn" class="text-center">Welcome! {{ email }}, {{ role }}</p>
   </div>
   <!-- Confirm Logout -->
   <div v-if="showLogoutConfirm" class="logout-confirm">

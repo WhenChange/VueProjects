@@ -1,18 +1,3 @@
-<!-- <template>
-  <div class="container mt-5 text-center">
-    <h1>Create an Account</h1>
-    <p><input type="text" placeholder="Email" v-model="email" /></p>
-    <p><input type="password" placeholder="Password" v-model="password" /></p>
-    <p>
-      <select v-model="role">
-        <option value="user">User</option>
-        <option value="staff">Staff</option>
-      </select>
-    </p>
-    <p><button @click="register">Save to Firebase</button></p>
-  </div>
-</template> -->
-
 <template>
   <div class="container mt-5 text-center">
     <div>
