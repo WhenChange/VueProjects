@@ -27,13 +27,13 @@ app.mount('#app')
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-    apiKey: "AIzaSyD2SGRRdT-WVGo_wZzjDmnZGrMx3FX-b0o",
-    authDomain: "fit5032-2024-s2.firebaseapp.com",
-    projectId: "fit5032-2024-s2",
-    storageBucket: "fit5032-2024-s2.appspot.com",
-    messagingSenderId: "1031513411510",
-    appId: "1:1031513411510:web:a2a448045a6b477c093b17"
-  };
+  apiKey: "AIzaSyDDBv-z9JSI4aZZ_U3555OGHTAQgNnr7_s",
+  authDomain: "fit5032-2024-s2-549b2.firebaseapp.com",
+  projectId: "fit5032-2024-s2-549b2",
+  storageBucket: "fit5032-2024-s2-549b2.appspot.com",
+  messagingSenderId: "14612887040",
+  appId: "1:14612887040:web:8295103664ab57d7814ae5"
+};
   
   // Initialize Firebase
 initializeApp(firebaseConfig);
