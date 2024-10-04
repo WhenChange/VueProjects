@@ -13,8 +13,38 @@ const {onRequest} = require("firebase-functions/v2/https");
 const admin = require("firebase-admin");
 const cors = require("cors")({origin: true});
 
+// const {onDocumentCreated} = require("firebase-functions/v2/firestore");
+const {onDocumentWritten} = require("firebase-functions/v2/firestore");
+
 admin.initializeApp();
 
+exports.capitaliseBooks =
+    onDocumentWritten("/books/{bookId}", async (event) => {
+      const newValue = event.data.after.data();
+      console.log(newValue);
+      const bookId = event.params.bookId;
+
+      if (!newValue) {
+        console.error("No data found for the document.");
+        return null;
+      }
+
+      const capitalisedData = {
+        isbn: String(newValue.isbn || "").toUpperCase(),
+        name: (newValue.name || "").toUpperCase(),
+      };
+
+      try {
+        await admin.firestore().collection("books")
+            .doc(bookId).update(capitalisedData);
+
+        console.log(`Book ${bookId} capitalised successfully.`);
+      } catch (error) {
+        console.error("Error capitalising book data: ", error);
+      }
+
+      return null;
+    });
 
 // Create and deploy your first functions
 // https://firebase.google.com/docs/functions/get-started

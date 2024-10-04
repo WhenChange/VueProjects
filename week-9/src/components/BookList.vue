@@ -1,6 +1,6 @@
 <template>
   <div class="container mt-5 text-center">
-    <h1>Books with ISBN > 1000</h1>
+    <h1>Books with ISBN</h1>
     <ul class="book">
       <li v-for="book in books" :key="book.id">
         {{ book.name }} - ISBN: {{ book.isbn }}
@@ -30,9 +30,18 @@
 </template>
 
 <script>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted } from 'vue'
 import db from '../firebase/init.js'
-import { collection, query, where, getDocs, deleteDoc, doc, updateDoc } from 'firebase/firestore'
+import {
+  collection,
+  onSnapshot,
+  query,
+  where,
+  getDocs,
+  deleteDoc,
+  doc,
+  updateDoc
+} from 'firebase/firestore'
 
 export default {
   setup() {
@@ -41,17 +50,20 @@ export default {
     const editedBook = ref({})
 
     const fetchBooks = async () => {
-      try {
-        const q = query(collection(db, 'books'), where('isbn', '>', 1000))
-        const querySnapshot = await getDocs(q)
-        const booksArray = []
-        querySnapshot.forEach((doc) => {
-          booksArray.push({ id: doc.id, ...doc.data() })
-        })
-        books.value = booksArray
-      } catch (error) {
-        console.error('Error fetching books: ', error)
-      }
+      const q = query(collection(db, 'books'))
+      onSnapshot(
+        q,
+        (querySnapshot) => {
+          const booksArray = []
+          querySnapshot.forEach((doc) => {
+            booksArray.push({ id: doc.id, ...doc.data() })
+          })
+          books.value = booksArray
+        },
+        (error) => {
+          console.error('Error fetching books: ', error)
+        }
+      )
     }
 
     // delete
@@ -66,8 +78,8 @@ export default {
 
     // show
     const openEditModal = (book) => {
-      editedBook.value = { ...book } // 
-      showEditModal.value = true // 
+      editedBook.value = { ...book } //
+      showEditModal.value = true //
     }
 
     // save
@@ -90,14 +102,8 @@ export default {
       showEditModal.value = false //
     }
 
-    
     onMounted(() => {
       fetchBooks()
-      window.addEventListener('book-added', fetchBooks)
-    })
-
-    onUnmounted(() => {
-      window.removeEventListener('book-added', fetchBooks)
     })
 
     return {
