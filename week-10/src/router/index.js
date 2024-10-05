@@ -10,9 +10,16 @@ import AddBookView from '../views/AddBookView.vue'
 import SearchBookView from '../views/SearchBookView.vue'
 import GetBookCountView from '../views/GetBookCountView.vue'
 import WeatherView from '../views/WeatherView.vue'
+import CountBookAPI from '../views/CountBookAPI.vue';
+
 
 
 const routes = [
+  {
+    path: '/CountBookAPI',
+    name: 'CountBookAPI',
+    component: CountBookAPI
+  },
   {
     path: '/WeatherCheck',
     name: 'WeatherCheck',
