@@ -11,18 +11,19 @@
 
 <script>
 import BHeader from './components/BHeader.vue'
-
 import CountBookAPI from './views/CountBookAPI.vue'
+import GetAllBookAPI from './views/GetAllBookAPI.vue';
 
 export default {
   name: 'App',
   components: {
     BHeader,
-    CountBookAPI
+    CountBookAPI,
+    GetAllBookAPI
   },
   computed: {
     showHeader() {
-      return this.$route.name !== 'CountBookAPI'
+      return this.$route.name !== 'CountBookAPI' && this.$route.name !== 'GetAllBookAPI'
     }
   }
 }
