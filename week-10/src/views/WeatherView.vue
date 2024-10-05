@@ -30,6 +30,89 @@
 </template>
 
 <script>
+import axios from 'axios';
+
+const apikey = '973021e0d0780ae3b0fb16e64b2d6062';
+
+export default {
+  name: 'App',
+  data() {
+    return {
+      city: '',           
+      weatherData: null,  
+      hourlyForecast: [],
+      dailyForecast: []
+    };
+  },
+  computed: {
+    temperature() {
+      return this.weatherData ? Math.floor(this.weatherData.main.temp - 273) : null;
+    },
+    iconUrl() {
+      return this.weatherData
+        ? `http://api.openweathermap.org/img/w/${this.weatherData.weather[0].icon}.png`
+        : null;
+    }
+  },
+  mounted() {
+    this.fetchCurrentLocationWeather();
+  },
+  methods: {
+    async searchByCity() {
+      if (!this.city) {
+        console.warn('No city provided, fetching current location weather.');
+        return this.fetchCurrentLocationWeather();
+      }
+    // http://api.openweathermap.org/geo/1.0/direct?q=$Clayton,AU&limit=1&appid=973021e0d0780ae3b0fb16e64b2d6062
+    // http://api.openweathermap.org/geo/1.0/direct?q=London&limit=5&appid=973021e0d0780ae3b0fb16e64b2d6062
+    // http://api.openweathermap.org/data/2.5/weather?lat=-37.9142211&lon=145.1268559&appid=973021e0d0780ae3b0fb16e64b2d6062
+      try {
+        const geoUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${this.city}&limit=1&appid=${apikey}`;
+        const geoResponse = await axios.get(geoUrl);
+
+        if (geoResponse.data.length === 0) {
+          console.warn('Invalid city, fetching current location weather.');
+          return this.fetchCurrentLocationWeather();
+        }
+
+        const { lat, lon } = geoResponse.data[0];
+
+        const weatherUrl = `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apikey}`;
+        await this.fetchWeatherData(weatherUrl);
+      } catch (error) {
+        console.error('Error fetching geolocation data:', error);
+        this.fetchCurrentLocationWeather();
+      }
+    },
+
+    async fetchCurrentLocationWeather() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(async (position) => {
+          const { latitude, longitude } = position.coords;
+          const url = `http://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apikey}`;
+          await this.fetchWeatherData(url);
+        }, (error) => {
+          console.error('Error getting current location:', error);
+        });
+      } else {
+        console.error('Geolocation is not supported by this browser.');
+      }
+    },
+
+    async fetchWeatherData(url) {
+      try {
+        const response = await axios.get(url);
+        this.weatherData = response.data;
+      } catch (error) {
+        console.error('Error fetching weather data:', error);
+      }
+    }
+  }
+};
+</script>
+
+
+<!-- <script>
 // The info section in 10.1.1 provided detailed information about this package
 import axios from 'axios'
 
@@ -98,4 +181,4 @@ export default {
     }
   }
 }
-</script>
+</script> -->
