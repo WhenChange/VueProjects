@@ -1,7 +1,5 @@
 <template>
-  <div class="container mt-5 text-center">
-    <pre>{{ jsondata }}</pre>
-  </div>
+    <pre class="text-center">{{ jsondata }}</pre>
 </template>
 
 <script>
