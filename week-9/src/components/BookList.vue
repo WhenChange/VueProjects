@@ -36,8 +36,6 @@ import {
   collection,
   onSnapshot,
   query,
-  where,
-  getDocs,
   deleteDoc,
   doc,
   updateDoc
@@ -78,8 +76,8 @@ export default {
 
     // show
     const openEditModal = (book) => {
-      editedBook.value = { ...book } //
-      showEditModal.value = true //
+      editedBook.value = { ...book } 
+      showEditModal.value = true 
     }
 
     // save
@@ -90,8 +88,8 @@ export default {
           name: editedBook.value.name,
           isbn: Number(editedBook.value.isbn)
         })
-        showEditModal.value = false //
-        fetchBooks() //
+        showEditModal.value = false 
+        fetchBooks()
       } catch (error) {
         console.error('Error updating book: ', error)
       }
@@ -99,7 +97,7 @@ export default {
 
     // close
     const closeEditModal = () => {
-      showEditModal.value = false //
+      showEditModal.value = false 
     }
 
     onMounted(() => {
