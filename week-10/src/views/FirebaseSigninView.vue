@@ -40,7 +40,7 @@ import db from '../firebase/init.js'
 import { ref } from 'vue'
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
 import { useRouter } from 'vue-router'
-import { doc, getDoc } from 'firebase/firestore' //
+import { doc, getDoc } from 'firebase/firestore'
 import { useStore } from 'vuex'
 
 const email = ref('')
@@ -54,13 +54,12 @@ const signin = () => {
     .then(async (userCredential) => {
       const user = userCredential.user
 
-      //
       const userDocRef = doc(db, 'users', user.uid)
       const userDoc = await getDoc(userDocRef)
 
       if (userDoc.exists()) {
         const userData = userDoc.data()
-        const userRole = userData.role //
+        const userRole = userData.role
 
         await store.dispatch('login', userData)
 
@@ -68,14 +67,13 @@ const signin = () => {
         console.log('User role:', userRole)
         alert('Login Successfully! Redirecting to home page...')
 
-        //
         if (userRole === 'admin') {
-          router.push('/admin') //
+          router.push('/admin')
         } else {
-          router.push('/') //
+          router.push('/')
         }
 
-        console.log(auth.currentUser) //
+        console.log(auth.currentUser)
       } else {
         alert('No such document with user role found!')
         console.log('No such document with user role found!')
