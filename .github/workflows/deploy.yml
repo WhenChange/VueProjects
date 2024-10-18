@@ -1,9 +1,44 @@
+# name: Deploy to GitHub Pages
+
+# on:
+#   push:
+#     branches:
+#       - main
+
+# jobs:
+#   build-and-deploy:
+#     runs-on: ubuntu-latest
+
+#     steps:
+#     - name: Checkout
+#       uses: actions/checkout@v4
+
+#     - name: Setup Node.js
+#       uses: actions/setup-node@v4
+#       with:
+#         node-version: '20'
+
+#     - name: Install dependencies
+#       run: npm ci
+
+#     - name: Build
+#       run: npm run build
+
+#     - name: Deploy
+#       uses: JamesIves/github-pages-deploy-action@4.1.4
+#       with:
+#         branch: gh-pages
+#         folder: dist
+
+# permissions:
+#   contents: write
+
 name: Deploy to GitHub Pages
 
 on:
   push:
     branches:
-      - main
+      - main  # 修改为你使用的分支名，例如 master
 
 jobs:
   build-and-deploy:
@@ -16,7 +51,10 @@ jobs:
     - name: Setup Node.js
       uses: actions/setup-node@v4
       with:
-        node-version: '20'
+        node-version: '20'  # 这里是指定 Node.js 版本
+
+    - name: Navigate to week-10 directory 📂
+      run: cd week-10  # 切换到 week-10 文件夹
 
     - name: Install dependencies
       run: npm ci
@@ -27,8 +65,8 @@ jobs:
     - name: Deploy
       uses: JamesIves/github-pages-deploy-action@4.1.4
       with:
-        branch: gh-pages
-        folder: dist
+        branch: gh-pages  # 发布到 GitHub Pages 的分支
+        folder: week-10/dist  # 指定 week-10 文件夹中的 dist 目录进行部署
 
 permissions:
   contents: write
