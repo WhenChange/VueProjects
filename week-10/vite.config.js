@@ -18,9 +18,9 @@ import vueDevTools from 'vite-plugin-vue-devtools'
 // })
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: '',
+  base: '/WhenChange/VueProjects/',
   build: {
-    outDir: 'dist'
+    outDir: 'week-10/dist'
   },
   plugins: [
     vue(),
